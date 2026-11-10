@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Video Generators — Verified November 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0b0e14; color: #e6e9ef; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.55; padding: 0 0 60px; }
+  header { background: linear-gradient(135deg, #111827 0%, #1e1b4b 55%, #312e81 100%); padding: 44px 20px 34px; text-align: center; border-bottom: 1px solid #2a2f3a; }
+  header h1 { font-size: 2rem; line-height: 1.25; margin-bottom: 10px; }
+  header p { color: #c7cdea; max-width: 760px; margin: 0 auto 8px; font-size: 1rem; }
+  .stamp { display: inline-block; background: #065f46; color: #d1fae5; font-weight: 700; font-size: .82rem; padding: 5px 12px; border-radius: 999px; margin-top: 10px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 18px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 8px; }
+  .controls input[type="search"] { flex: 2 1 260px; padding: 11px 14px; border-radius: 10px; border: 1px solid #2a2f3a; background: #141926; color: #e6e9ef; font-size: 1rem; }
+  .controls select { flex: 1 1 160px; padding: 11px 10px; border-radius: 10px; border: 1px solid #2a2f3a; background: #141926; color: #e6e9ef; font-size: .95rem; }
+  .count { color: #9aa3b2; font-size: .9rem; margin: 6px 0 18px; }
+  h2 { font-size: 1.35rem; margin: 34px 0 6px; padding-top: 10px; border-top: 1px solid #232838; }
+  h2:first-of-type { border-top: none; }
+  .section-note { color: #9aa3b2; font-size: .95rem; margin-bottom: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 16px; }
+  .card { background: #141926; border: 1px solid #262c3d; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; }
+  .card h3 { font-size: 1.12rem; margin-bottom: 2px; }
+  .card h3 a { color: #93c5fd; text-decoration: none; }
+  .card h3 a:hover { text-decoration: underline; }
+  .model { color: #9aa3b2; font-size: .88rem; margin-bottom: 10px; }
+  .badge { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; margin-bottom: 10px; }
+  .badge.daily { background: #065f46; color: #d1fae5; }
+  .badge.trial { background: #92400e; color: #fef3c7; }
+  .badge.self { background: #1e40af; color: #dbeafe; }
+  .badge.pick { background: #7c3aed; color: #ede9fe; margin-left: 6px; }
+  .free { font-size: 1rem; font-weight: 600; color: #fbbf24; margin-bottom: 10px; }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; font-size: .9rem; margin-bottom: 10px; }
+  .stats div b { color: #c7cdea; font-weight: 600; }
+  .best { font-size: .92rem; color: #d6dae3; border-top: 1px dashed #2a2f3a; padding-top: 10px; margin-top: auto; }
+  .best b { color: #93c5fd; }
+  .verified { font-size: .78rem; color: #6ee7b7; margin-top: 10px; }
+  .warn { background: #1c1410; border: 1px solid #7c2d12; border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; }
+  .warn h3 { color: #fdba74; font-size: 1.05rem; margin-bottom: 4px; }
+  .warn p { font-size: .93rem; color: #e7d9cd; }
+  .warn p b { color: #fff; }
+  footer { color: #8b93a5; font-size: .85rem; margin-top: 40px; border-top: 1px solid #232838; padding-top: 18px; }
+  footer a { color: #93c5fd; }
+  .empty { display: none; text-align: center; color: #9aa3b2; padding: 30px 0; }
+  @media (max-width: 560px) { header h1 { font-size: 1.5rem; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎬 Free AI Video Generators</h1>
+  <p>Every high-quality AI video tool with a genuinely working free tier — checked one by one. No junk, no dead tools, no "free" tools that give you zero credits.</p>
+  <span class="stamp">✓ Verified November 2026</span>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <input type="search" id="q" placeholder="Search tools… (try: Veo, Kling, no watermark, sound)" aria-label="Search tools">
+    <select id="type" aria-label="Filter by type">
+      <option value="all">All types</option>
+      <option value="daily">Daily free credits</option>
+      <option value="trial">One-time trial only</option>
+      <option value="self">Self-hosted (GPU)</option>
+    </select>
+    <select id="seconds" aria-label="Filter by clip length">
+      <option value="0">Any clip length</option>
+      <option value="5">5 seconds or more</option>
+      <option value="8">8 seconds or more</option>
+      <option value="10">10 seconds or more</option>
+    </select>
+    <select id="wm" aria-label="Filter by watermark">
+      <option value="all">Any watermark</option>
+      <option value="nowm">No visible watermark</option>
+      <option value="wm">Watermarked</option>
+    </select>
+    <select id="sort" aria-label="Sort tools">
+      <option value="rank">Sort: Editor's pick</option>
+      <option value="longest">Sort: Longest clip first</option>
+      <option value="az">Sort: A–Z</option>
+    </select>
+  </div>
+  <p class="count" id="count"></p>
+
+  <h2>🟢 Daily free — credits refill every day</h2>
+  <p class="section-note">These are the working free tiers. Come back tomorrow and the credits are there again. All of them watermark free exports except where noted, and none of them allow commercial use on the free plan — check each tool's terms before publishing paid work.</p>
+  <div class="grid" id="daily"></div>
+
+  <h2>🟡 One-time trial only — no daily refill</h2>
+  <p class="section-note">Real free generations, but once the credits are gone they never come back. Good for testing a tool before you pay — not for ongoing work.</p>
+  <div class="grid" id="trial"></div>
+
+  <h2>🔵 Free forever — open-source, run it yourself</h2>
+  <p class="section-note">These models are free software: unlimited generations, no watermark, commercial use allowed under their licences. The catch is hardware — you need a powerful GPU (typically 24&nbsp;GB+ VRAM) or a rented cloud GPU. Not usable from a phone on their own.</p>
+  <div class="grid" id="self"></div>
+
+  <h2>🔴 Not included — and why</h2>
+  <p class="section-note">Tools people ask about that do <b>not</b> have a usable free tier. Do not waste time signing up for these expecting free video.</p>
+  <div id="excluded"></div>
+
+  <p class="empty" id="empty">No tools match your search. Try clearing a filter.</p>
+
+  <footer>
+    <p><b>How this list was verified (November 2026):</b> every free limit above was checked against the tool's own pricing or help page, or against at least two independent November 2026 comparisons that cite those pages. Pika's pricing page (0 credits/month on the Free plan) and Luma's pricing page (no free plan listed) were read directly on 10 November 2026. Free tiers change often — sometimes monthly — so always re-check the official pricing page before planning production around a limit.</p>
+    <p style="margin-top:8px">Free tiers are for personal, non-commercial use unless stated otherwise. Watermarks and commercial-use rules come from each vendor's terms. This directory is an independent community project and is not affiliated with Google, ByteDance, Kuaishou, Adobe, Anthropic, OpenAI or any listed vendor. Contributions welcome — see the <a href="https://github.com/">README</a> in the repository.</p>
+  </footer>
+</div>
+
+<script>
+const TOOLS = [
+  { name: "Google Flow", url: "https://labs.google/fx/tools/flow", model: "Veo 3.1 (Lite / Fast)", type: "daily", rank: 1, pick: true,
+    free: "50 credits/day — ~5 Veo 3.1 Lite clips or 2 Fast clips a day",
+    seconds: 8, resolution: "720p", watermark: "Yes", wm: "wm", commercial: "No", audio: "Yes — dialogue + SFX",
+    best: "Best overall free quality. Real sound, best faces and motion. Free plan often blocked at peak hours (about 2–5 PM UTC)." },
+  { name: "Kling AI", url: "https://klingai.com", model: "Kling 3.0 / 4.0", type: "daily", rank: 2,
+    free: "66 credits/day (log in daily — expires in 24h). ~6 standard 5s clips a day",
+    seconds: 10, resolution: "720p (1080p costs more)", watermark: "Yes", wm: "wm", commercial: "No", audio: "Yes (costs more)",
+    best: "Most free footage per month of any hosted tool. Great for daily practice and testing prompts." },
+  { name: "Dreamina (CapCut)", url: "https://dreamina.capcut.com", model: "Seedance 2.0 (2.5 also on daily credits)", type: "daily", rank: 3,
+    free: "Free daily credits (amount unpublished, varies by region; ~120/day in the US). Roughly 2–3 videos a day",
+    seconds: 10, resolution: "Up to 1080p", watermark: "Yes", wm: "wm", commercial: "No", audio: "Yes — synced sound",
+    best: "Top-10 arena quality for free. Best motion and sound in a single pass. Real faces blocked on free." },
+  { name: "PixVerse", url: "https://pixverse.ai", model: "PixVerse V6", type: "daily", rank: 4,
+    free: "30 credits/day + 60 starter credits. About 1 clip a day at default settings",
+    seconds: 8, resolution: "540p", watermark: "Yes", wm: "wm", commercial: "No", audio: "Yes (some models)",
+    best: "Easy text-to-video and image-to-video in one place. 540p looks soft — best for testing hooks." },
+  { name: "Vidu", url: "https://www.vidu.com", model: "Vidu Q3", type: "daily", rank: 5,
+    free: "80 credits/month (~10 clips) + unlimited off-peak generation (slow queue, jobs can pend up to 48h)",
+    seconds: 8, resolution: "720p", watermark: "Yes", wm: "wm", commercial: "No", audio: "Yes — native synced audio",
+    best: "Synced dialogue and sound in one pass. Off-peak mode = unlimited free tries if you can wait." },
+  { name: "Adobe Firefly", url: "https://firefly.adobe.com", model: "Firefly Video Model", type: "daily", rank: 6,
+    free: "Daily free generations (Adobe does not publish the daily count — learn it by trying)",
+    seconds: 8, resolution: "1080p", watermark: "No", wm: "nowm", commercial: "Not stated for free", audio: "No",
+    best: "The only daily-free tool with no watermark. Its own model is trained on licensed content, so it is the safest free pick for client-style clips." },
+  { name: "Krea", url: "https://www.krea.ai", model: "LTX-2 19B (free tier)", type: "daily", rank: 7,
+    free: "100 compute units/day — about two 5s LTX-2 clips a day (34 units each)",
+    seconds: 5, resolution: "512p", watermark: "No", wm: "nowm", commercial: "No (paid only)", audio: "No (free model)",
+    best: "The other no-watermark free video option. Also runs Seedance, Veo and Kling in one place — on paid plans." },
+  { name: "HeyGen Video 1", url: "https://www.heygen.com", model: "HeyGen Video 1", type: "daily", rank: 8,
+    free: "2 free clips a day from the web playground. Plus 1–3 free avatar videos a month on the Free plan",
+    seconds: 5, resolution: "768p", watermark: "Not stated", wm: "wm", commercial: "No", audio: "Yes — dialogue + SFX",
+    best: "Scenes with dialogue and sound effects in one pass, in 4 styles (Claymation, Live action, Anime, Screen print)." },
+  { name: "Leonardo.Ai", url: "https://leonardo.ai", model: "Motion (video)", type: "daily", rank: 9,
+    free: "150 tokens/day, video included (exact per-clip token cost varies)",
+    seconds: 5, resolution: "720p", watermark: "Not stated", wm: "wm", commercial: "No — free creations are public", audio: "No",
+    best: "Images and video in one account. Good for testing a look before generating video elsewhere." },
+  { name: "Google Vids", url: "https://workspace.google.com/products/vids/", model: "Gemini Omni", type: "daily", rank: 10,
+    free: "Free with any Google account — no stated cap on AI clips",
+    seconds: 8, resolution: "720p", watermark: "Invisible (SynthID) only", wm: "nowm", commercial: "Not stated", audio: "Not stated",
+    best: "Free AI clips inside Google's video editor. No daily credit math — the most relaxed free option." },
+  { name: "Meta AI", url: "https://www.meta.ai", model: "Meta AI video (Vibes)", type: "daily", rank: 11,
+    free: "Free in the Meta AI app — no fixed daily number published",
+    seconds: 6, resolution: "Varies", watermark: "Not stated", wm: "wm", commercial: "No", audio: "Yes",
+    best: "Free AI videos right on your phone. Quick fun clips, not a production tool." },
+  { name: "YouTube Shorts (Dream Screen)", url: "https://www.youtube.com", model: "Veo (Dream Screen)", type: "daily", rank: 12,
+    free: "Free inside the YouTube app's Shorts creator",
+    seconds: 8, resolution: "720p", watermark: "AI label applied", wm: "wm", commercial: "For Shorts use", audio: "Yes",
+    best: "Free Veo clips made for Shorts — the exact format this channel publishes in (9:16, short)." },
+
+  { name: "Runway", url: "https://runwayml.com", model: "Gen-4 Turbo", type: "trial", rank: 13,
+    free: "125 credits, ONE TIME only — never refills. About 25 seconds of Gen-4 Turbo total",
+    seconds: 10, resolution: "720p", watermark: "Yes", wm: "wm", commercial: "No", audio: "No",
+    best: "Gen-4.5 is NOT on the free plan. Worth one test drive of Runway's pipeline — then it stops." },
+  { name: "Hailuo (MiniMax)", url: "https://hailuoai.com", model: "Hailuo / MiniMax H3", type: "trial", rank: 14,
+    free: "One-time signup credits only — the recurring daily bonus was removed in 2026",
+    seconds: 6, resolution: "720p", watermark: "Yes", wm: "wm", commercial: "No", audio: "Yes",
+    best: "Strong faces and expressions, but the free tier is now a short demo, not a daily tool." },
+  { name: "Luma Dream Machine", url: "https://lumalabs.ai", model: "Ray3 / Ray2", type: "trial", rank: 15,
+    free: "No recurring free plan on its pricing page (checked 10 Nov 2026). Only trial credits — amount not published",
+    seconds: 10, resolution: "Up to 1080p", watermark: "Yes", wm: "wm", commercial: "No", audio: "No",
+    best: "Famous for cinematic camera motion — but there is no usable free tier left to rely on." },
+
+  { name: "Wan 2.2", url: "https://github.com/Wan-Video/Wan2.2", model: "Wan 2.2 (Alibaba)", type: "self", rank: 16,
+    free: "Unlimited — free open-source software (Apache 2.0). No credits, no queue",
+    seconds: 30, resolution: "Up to 1080p+", watermark: "No", wm: "nowm", commercial: "Yes (Apache 2.0)", audio: "No",
+    best: "Genuinely unlimited, watermark-free video — if you have a strong GPU (typically 24GB+ VRAM)." },
+  { name: "HunyuanVideo 1.5", url: "https://github.com/Tencent/HunyuanVideo", model: "HunyuanVideo (Tencent)", type: "self", rank: 17,
+    free: "Unlimited — free open-source software. No credits, no queue",
+    seconds: 30, resolution: "Up to 1080p+", watermark: "No", wm: "nowm", commercial: "Yes", audio: "No",
+    best: "High-quality open model with native audio support in some builds. Needs a strong GPU." },
+  { name: "LTX-2", url: "https://github.com/Lightricks/LTX-Video", model: "LTX-2 (Lightricks)", type: "self", rank: 18,
+    free: "Unlimited — free open-source software. No credits, no queue",
+    seconds: 30, resolution: "Up to 1080p+", watermark: "No", wm: "nowm", commercial: "Yes", audio: "No",
+    best: "Very fast generation and good motion. The same model Krea runs on its free tier — here with no limits." },
+  { name: "CogVideoX", url: "https://github.com/THUDM/CogVideo", model: "CogVideoX (Tsinghua / Zhipu)", type: "self", rank: 19,
+    free: "Unlimited — free open-source software. No credits, no queue",
+    seconds: 30, resolution: "Up to 1080p", watermark: "No", wm: "nowm", commercial: "Yes", audio: "No",
+    best: "Solid open text-to-video and image-to-video. Needs a strong GPU." },
+  { name: "Mochi 1", url: "https://github.com/genmo/mochi", model: "Mochi 1 (Genmo)", type: "self", rank: 20,
+    free: "Unlimited — free open-source software (Apache 2.0). No credits, no queue",
+    seconds: 30, resolution: "Up to 1080p", watermark: "No", wm: "nowm", commercial: "Yes (Apache 2.0)", audio: "No",
+    best: "Strong motion quality for an open model. Needs a strong GPU." }
+];
+
+const EXCLUDED = [
+  { name: "Sora (OpenAI)", why: "Shut down. OpenAI closed the Sora app on 26 April 2026 and discontinued the Sora API on 24 September 2026. There is no free Sora anywhere any more — any site still offering it is a scam or a reseller." },
+  { name: "Pika", why: "Free plan = 0 credits a month. Verified on pika.art/pricing on 10 November 2026: the Free plan lists '0 · credit packs only'. You cannot generate anything free — only paid credit packs. (No watermark, but nothing to generate with.)" },
+  { name: "Canva (AI video)", why: "Canva's AI video clips (Veo) are not available on the Canva Free plan — they need Canva Pro. The free plan has no video generation." },
+  { name: "Grok Imagine", why: "Free generation ended in March 2026. Image and video generation in Grok is now paid-only." },
+  { name: "Gemini app (video)", why: "Video generation in the Gemini app moved behind paid Google AI plans in 2026. Free video lives in Google Flow and Google Vids instead — both are listed above." },
+  { name: "Higgsfield", why: "Its free plan includes 0 credits — same trap as Pika. Nothing free to generate." },
+  { name: "Synthesia", why: "No free video generations at all — only a sales demo. Every video needs a paid plan." }
+];
+
+const TYPE_LABEL = { daily: "Daily free", trial: "One-time trial", self: "Self-hosted" };
+
+function card(t) {
+  return `<article class="card" data-name="${t.name.toLowerCase()} ${t.model.toLowerCase()} ${t.best.toLowerCase()}">
+    <span class="badge ${t.type}">${TYPE_LABEL[t.type]}</span>${t.pick ? '<span class="badge pick">★ Editor’s pick</span>' : ''}
+    <h3><a href="${t.url}" target="_blank" rel="noopener">${t.name}</a></h3>
+    <p class="model">${t.model}</p>
+    <p class="free">FREE: ${t.free}</p>
+    <div class="stats">
+      <div><b>Max clip:</b> ${t.seconds}s per video</div>
+      <div><b>Resolution:</b> ${t.resolution}</div>
+      <div><b>Watermark:</b> ${t.watermark}</div>
+      <div><b>Commercial use:</b> ${t.commercial}</div>
+      <div><b>Sound:</b> ${t.audio}</div>
+    </div>
+    <p class="best"><b>Best for:</b> ${t.best}</p>
+    <p class="verified">✓ Verified November 2026</p>
+  </article>`;
+}
+
+function render() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const type = document.getElementById('type').value;
+  const minSec = parseInt(document.getElementById('seconds').value, 10);
+  const wm = document.getElementById('wm').value;
+  const sort = document.getElementById('sort').value;
+
+  let list = TOOLS.filter(t => {
+    if (type !== 'all' && t.type !== type) return false;
+    if (t.seconds < minSec) return false;
+    if (wm === 'nowm' && t.wm !== 'nowm') return false;
+    if (wm === 'wm' && t.wm !== 'wm') return false;
+    if (q && !(t.name + ' ' + t.model + ' ' + t.best + ' ' + t.free).toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  if (sort === 'longest') list = [...list].sort((a, b) => b.seconds - a.seconds || a.rank - b.rank);
+  else if (sort === 'az') list = [...list].sort((a, b) => a.name.localeCompare(b.name));
+  else list = [...list].sort((a, b) => a.rank - b.rank);
+
+  const sections = { daily: '', trial: '', self: '' };
+  list.forEach(t => { sections[t.type] += card(t); });
+  document.getElementById('daily').innerHTML = sections.daily;
+  document.getElementById('trial').innerHTML = sections.trial;
+  document.getElementById('self').innerHTML = sections.self;
+
+  document.getElementById('count').textContent =
+    `Showing ${list.length} of ${TOOLS.length} tools` +
+    (type !== 'all' || minSec > 0 || wm !== 'all' || q ? ' — filters active' : '') + '.';
+  document.getElementById('empty').style.display = list.length === 0 ? 'block' : 'none';
+  document.querySelectorAll('h2')[0].style.display = sections.daily ? '' : 'none';
+  document.querySelectorAll('h2')[1].style.display = sections.trial ? '' : 'none';
+  document.querySelectorAll('h2')[2].style.display = sections.self ? '' : 'none';
+}
+
+document.getElementById('excluded').innerHTML = EXCLUDED.map(e =>
+  `<div class="warn"><h3>${e.name}</h3><p>${e.why}</p></div>`).join('');
+
+['q', 'type', 'seconds', 'wm', 'sort'].forEach(id =>
+  document.getElementById(id).addEventListener('input', render));
+render();
+</script>
+</body>
+</html>
